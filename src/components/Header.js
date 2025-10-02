@@ -2,7 +2,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useCart } from '../context/CartContext.js';
+import { useCart } from '@/context/CartContext';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

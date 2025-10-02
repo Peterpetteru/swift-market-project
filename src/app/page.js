@@ -1,44 +1,50 @@
-// src/app/page.js
-
-import Header from '../components/Header.js';
-import Hero from '../components/Hero.js';
-import Products from '../components/Products.js';
-import WhyChooseUs from '../components/WhyChooseUs.js';
-import OurStory from '../components/OurStory.js';
-import Testimonials from '../components/Testimonials.js';
-import FAQ from '../components/FAQ.js';
-import Newsletter from '../components/Newsletter.js';
-import Footer from '../components/Footer.js';
-// STEP 1: Import our new animation wrapper
-import ScrollAnimation from '../components/ScrollAnimation.js';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Products from '@/components/Products';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import OurStory from '@/components/OurStory';
+import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
+import Newsletter from '@/components/Newsletter';
+import CTA from '@/components/CTA';
+import Footer from '@/components/Footer';
+// Import our new animation component
+import ScrollAnimation from '@/components/ScrollAnimation';
 
 export default function Home() {
   return (
     <main>
       <Header />
-      {/* STEP 2: Wrap each section component with the ScrollAnimation wrapper */}
-      <ScrollAnimation>
-        <Hero />
-      </ScrollAnimation>
+      <Hero />
+      
+      {/* We wrap each section to apply the scroll-in animation */}
       <ScrollAnimation>
         <Products />
       </ScrollAnimation>
+      
       <ScrollAnimation>
         <WhyChooseUs />
       </ScrollAnimation>
+      
       <ScrollAnimation>
         <OurStory />
       </ScrollAnimation>
+      
       <ScrollAnimation>
         <Testimonials />
       </ScrollAnimation>
+
       <ScrollAnimation>
         <FAQ />
       </ScrollAnimation>
+
       <ScrollAnimation>
         <Newsletter />
       </ScrollAnimation>
+      
+      <CTA />
       <Footer />
     </main>
   );
 }
+

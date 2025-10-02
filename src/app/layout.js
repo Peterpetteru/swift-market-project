@@ -1,18 +1,21 @@
-// src/app/layout.js
-
-import { Geist, Geist_Mono } from "next/font/google";
-// THIS IS THE CRITICAL LINE THAT LOADS ALL YOUR STYLES
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { CartProvider } from "../context/CartContext";
+import { CartProvider } from "@/context/CartContext";
+// STEP 1: Import our new Chatbot component
+import Chatbot from "@/components/Chatbot";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
+const inter = Inter({ 
   subsets: ["latin"],
+  variable: '--font-inter',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
 });
 
 export const metadata = {
@@ -23,11 +26,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <CartProvider>
           {children}
+          {/* STEP 2: Add the Chatbot component here. It will float above all other content. */}
+          <Chatbot />
         </CartProvider>
       </body>
     </html>
   );
 }
+

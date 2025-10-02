@@ -1,7 +1,25 @@
-/* src/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* THE CHANGE: This new rule sets the default text styles for the entire site. */
+@layer base {
+  body {
+    @apply text-sm md:text-base text-gray-700;
+  }
+}
+
+/* Custom Swiper Pagination Styling */
+.swiper-pagination-bullet {
+  background-color: #d6a47f !important;
+  opacity: 0.6 !important;
+  transition: all 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+  background-color: #78350f !important;
+  opacity: 1 !important;
+  transform: scale(1.2);
+}
 
 /* Custom Scrollbar Styling */
 ::-webkit-scrollbar {
