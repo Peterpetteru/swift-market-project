@@ -1,5 +1,3 @@
-// src/components/Testimonials.js
-
 // Define the testimonial data in an array.
 const testimonials = [
   {
@@ -22,7 +20,7 @@ const testimonials = [
   }
 ];
 
-function Testimonials() {
+export default function Testimonials() {
   return (
     <section id="testimonials" className="bg-white py-20 px-4">
       <div className="container mx-auto">
@@ -32,7 +30,8 @@ function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="bg-amber-50 p-8 rounded-lg shadow-md">
-              <p className="text-amber-800 italic mb-4">"{testimonial.quote}"</p>
+              {/* THE FIX: Replaced " with &quot; to fix the error */}
+              <p className="text-amber-800 italic mb-4">&quot;{testimonial.quote}&quot;</p>
               <p className="font-bold text-amber-950">{testimonial.author}</p>
               <p className="text-sm text-amber-700">{testimonial.location}</p>
             </div>
@@ -42,5 +41,3 @@ function Testimonials() {
     </section>
   );
 }
-
-export default Testimonials;

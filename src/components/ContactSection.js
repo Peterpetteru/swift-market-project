@@ -1,25 +1,17 @@
-// src/components/ContactSection.js
-'use client'; // This must be a client component to handle form interaction.
+'use client'; 
 
 import { useState } from 'react';
 
 export default function ContactSection() {
-  // State to manage the form inputs
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  // State to manage the success message
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents the default form submission (page reload)
-    
-    // In a real application, you would send this data to a server or email service.
-    // For now, we'll simulate it.
+    e.preventDefault(); 
     console.log('Form Submitted:', { name, email, message });
-    
-    setIsSubmitted(true); // Show the success message
-    // Clear the form
+    setIsSubmitted(true);
     setName('');
     setEmail('');
     setMessage('');
@@ -30,20 +22,18 @@ export default function ContactSection() {
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">Get In Touch</h1>
-          <p className="text-gray-600 mt-2">We'd love to hear from you. Send us a message and we'll get back to you as soon as possible.</p>
+          {/* THE FIX: Replaced ' with &apos; to fix the error */}
+          <p className="text-gray-600 mt-2">We&apos;d love to hear from you. Send us a message and we&apos;ll get back to you as soon as possible.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-gray-50 p-8 rounded-lg shadow-md">
-          {/* Column 1: Contact Info */}
           <div className="text-gray-700">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Information</h3>
             <p className="mb-2"><strong>Email:</strong> support@coffeeco.com</p>
             <p className="mb-2"><strong>Phone:</strong> +234 123 456 7890</p>
             <p><strong>Address:</strong> 123 Coffee Lane, Ikeja, Lagos, Nigeria</p>
-            {/* You could add an embedded Google Map here in the future */}
           </div>
 
-          {/* Column 2: Contact Form */}
           <div>
             {isSubmitted ? (
               <div className="text-center p-8 bg-green-100 text-green-800 rounded-lg">

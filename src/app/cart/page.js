@@ -1,9 +1,10 @@
-// src/app/cart/page.js
 'use client';
 
-import Header from '../../components/Header.js';
-import Footer from '../../components/Footer.js';
-import { useCart } from '../../context/CartContext.js';
+import Link from 'next/link'; // Import the Link component
+import Image from 'next/image'; // Import the Image component
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { useCart } from '@/context/CartContext';
 
 export default function CartPage() {
   const { cart, addToCart, decreaseQuantity, removeFromCart, clearCart } = useCart();
@@ -22,9 +23,9 @@ export default function CartPage() {
           {cart.length === 0 ? (
             <div className="text-center py-12 px-6 bg-white rounded-lg shadow-md">
               <p className="text-gray-600 text-lg mb-4">Your cart is currently empty.</p>
-              <a href="/" className="bg-amber-900 text-white font-bold py-3 px-6 rounded-full hover:bg-amber-800 transition-colors duration-300">
+              <Link href="/" className="bg-amber-900 text-white font-bold py-3 px-6 rounded-full hover:bg-amber-800 transition-colors duration-300">
                 Continue Shopping
-              </a>
+              </Link>
             </div>
           ) : (
             <>
@@ -33,7 +34,13 @@ export default function CartPage() {
                   {cart.map(item => (
                     <div key={item.id} className="flex items-center justify-between border-b border-gray-200 pb-4 last:border-b-0">
                        <div className="flex items-center gap-4">
-                        <img src={item.imageUrl} alt={item.name} className="w-20 h-20 rounded-md object-cover"/>
+                        <Image 
+                          src={item.imageUrl} 
+                          alt={item.name}
+                          width={80}
+                          height={80}
+                          className="w-20 h-20 rounded-md object-cover"
+                        />
                         <div>
                           <h2 className="font-bold text-gray-800">{item.name}</h2>
                           <p className="text-sm text-gray-500">{item.price}</p>
@@ -63,13 +70,11 @@ export default function CartPage() {
                     <span>Total</span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
-                  {/* The button is now a link to our success page */}
-                  <a href="/checkout/success" className="block text-center mt-6 w-full bg-amber-900 text-white font-bold py-3 px-6 rounded-full hover:bg-amber-800 transition-colors duration-300 shadow-lg">
+                  <Link href="/checkout/success" className="block text-center mt-6 w-full bg-amber-900 text-white font-bold py-3 px-6 rounded-full hover:bg-amber-800 transition-colors duration-300 shadow-lg">
                     Proceed to Checkout
-                  </a>
+                  </Link>
                 </div>
               </div>
-              {/* NEW: The "Clear Cart" button */}
               <div className="text-center mt-8">
                 <button onClick={() => clearCart()} className="text-gray-500 hover:text-red-600 hover:underline font-semibold transition-colors">
                   Clear All Items from Cart

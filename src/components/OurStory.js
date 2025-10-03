@@ -1,3 +1,6 @@
+// We are reverting to a standard <img> tag to resolve the compilation error.
+// This is a stable approach that guarantees the image will display.
+
 // This is a simple, stable Server Component. No 'use client'.
 export default function OurStory() {
   return (
@@ -7,7 +10,7 @@ export default function OurStory() {
           
           {/* Image Column */}
           <div>
-            {/* Make sure you have an image named 'roastery-bg.jpg' in your /public folder */}
+            {/* THE FIX: Reverted to a standard <img> tag to ensure stability. */}
             <img 
               src="/roastery-bg.jpg" 
               alt="Inside the Coffee Co. roastery"
@@ -23,8 +26,9 @@ export default function OurStory() {
             <p className="text-gray-700 mb-4">
               Coffee Co. was born from a simple idea: that everyone deserves to experience truly exceptional coffee. It all started in a small garage in Lagos, with a relentless pursuit of the perfect roast.
             </p>
+            {/* THE FIX: Replaced ' with &apos; to fix the error */}
             <p className="text-gray-700">
-              Today, we're proud to bring you a curated selection of single-origin beans and signature blends, each telling a unique story of its origin. Every batch is roasted with precision and care, ensuring that the coffee that reaches your cup is the freshest and most flavorful possible.
+              Today, we&apos;re proud to bring you a curated selection of single-origin beans and signature blends, each telling a unique story of its origin. Every batch is roasted with precision and care, ensuring that the coffee that reaches your cup is the freshest and most flavorful possible.
             </p>
           </div>
 
