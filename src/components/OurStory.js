@@ -1,5 +1,4 @@
-// We are reverting to a standard <img> tag to resolve the compilation error.
-// This is a stable approach that guarantees the image will display.
+import Image from 'next/image'; // Import the Image component
 
 // This is a simple, stable Server Component. No 'use client'.
 export default function OurStory() {
@@ -10,10 +9,12 @@ export default function OurStory() {
           
           {/* Image Column */}
           <div>
-            {/* THE FIX: Reverted to a standard <img> tag to ensure stability. */}
-            <img 
+            {/* THE FIX: Upgraded <img> to Next.js <Image> for optimization */}
+            <Image 
               src="/roastery-bg.jpg" 
               alt="Inside the Coffee Co. roastery"
+              width={600}
+              height={400}
               className="rounded-lg shadow-lg w-full h-auto"
             />
           </div>
