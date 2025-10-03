@@ -2,11 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 
 // --- THIS IS OUR LOCAL "BRAIN" ---
-// "Training" means adding more 'if' statements to this function.
 const getLocalBotResponse = (message) => {
   const lowerCaseMessage = message.toLowerCase();
-
-  // --- Our "Training" is now a series of keyword checks ---
 
   if (lowerCaseMessage.includes('shipping')) {
     return "We ship all orders within 48 hours. Delivery within Nigeria typically takes 2-4 business days.";
@@ -23,21 +20,14 @@ const getLocalBotResponse = (message) => {
   if (lowerCaseMessage.includes('sourcing') || lowerCaseMessage.includes('ethically')) {
     return "We're proud to say all our coffee is ethically and sustainably sourced directly from farmers, ensuring they receive fair wages.";
   }
-  
-  // --- NEW TRAINING RULE ADDED HERE ---
   if (lowerCaseMessage.includes('origin') || lowerCaseMessage.includes('come from')) {
     return "Our coffees are sourced from some of the best growing regions in the world! Our Morning Rise is from Ethiopia, the Midnight Espresso is from Brazil, and our Sunset Decaf comes from Colombia. 🌎";
   }
-  // --- YOU CAN ADD MORE 'if' STATEMENTS LIKE THE ONE ABOVE TO TRAIN THE BOT FURTHER ---
-
   if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi') || lowerCaseMessage.includes('help')) {
     return "Hello! I'm BrewBot, the Coffee Co. assistant. You can ask me about our products, shipping, or sourcing. How can I help? ☕";
   }
-
-  // A generic fallback response if no keywords are matched
   return "That's a great question! I'm a simple bot and might not have the answer. For more complex inquiries, please reach out to our team at support@coffeeco.com.";
 };
-
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,12 +51,10 @@ export default function Chatbot() {
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
-
     const userMessage = { from: 'user', text: inputValue };
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
-
     setTimeout(() => {
       const botResponse = getLocalBotResponse(inputValue);
       setIsLoading(false);
@@ -76,21 +64,33 @@ export default function Chatbot() {
 
   return (
     <>
-      <button onClick={() => setIsOpen(!isOpen)} className="fixed bottom-6 right-6 bg-amber-900 text-white w-20 h-20 rounded-full shadow-lg flex items-center justify-center z-50 transition-transform hover:scale-110" aria-label="Open chat">
-         <div className="w-12 h-12 relative">{isOpen ? (<svg viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="35" width="25" height="20" rx="5" ry="5" stroke="white" strokeWidth="4" fill="none"/><rect x="55" y="35" width="25" height="20" rx="5" ry="5" stroke="white" strokeWidth="4" fill="none"/><line x1="45" y1="45" x2="55" y2="45" stroke="white" strokeWidth="4"/><line x1="25" y1="45" x2="40" y2="45" stroke="white" strokeWidth="4" /><line x1="60" y1="45" x2="75" y2="45" stroke="white" strokeWidth="4" /><line x1="40" y1="70" x2="60" y2="70" stroke="white" strokeWidth="4" /></svg>) : (<svg viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="35" width="25" height="20" rx="5" ry="5" stroke="white" strokeWidth="4" fill="none"/><rect x="55" y="35" width="25" height="20" rx="5" ry="5" stroke="white" strokeWidth="4" fill="none"/><line x1="45" y1="45" x2="55" y2="45" stroke="white" strokeWidth="4"/><circle cx="32.5" cy="45" r="5" /><circle cx="67.5" cy="45" r="5" /><path d="M 40 70 Q 50 80 60 70" stroke="white" strokeWidth="4" fill="none" /></svg>)}</div>
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-4 right-4 bg-amber-900 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center z-50 transition-all duration-300 ease-in-out hover:scale-110"
+        aria-label="Toggle chat"
+      >
+         {/* THE CHANGE: Reverted to the classic message icon */}
+         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+         </svg>
       </button>
 
-      <div className={`fixed bottom-28 right-6 w-96 bg-white rounded-lg shadow-2xl z-50 transition-all duration-300 origin-bottom-right ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-        <div className="p-4 bg-amber-950 text-white rounded-t-lg flex justify-between items-center">
+      <div className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:w-96 bg-white rounded-lg shadow-2xl z-50 flex flex-col max-h-[calc(100vh-8rem)] transition-all duration-300 ease-in-out origin-bottom-right ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'}`}>
+        {/* Header */}
+        <div className="p-4 bg-amber-950 text-white rounded-t-lg flex justify-between items-center flex-shrink-0">
           <h3 className="font-bold text-lg">Coffee Co. Assistant</h3>
           <button onClick={() => setIsOpen(false)} className="text-amber-200 hover:text-white text-2xl leading-none">&times;</button>
         </div>
-        <div className="h-96 overflow-y-auto p-4 space-y-4">
+        
+        {/* Message List (This part now scrolls correctly) */}
+        <div className="flex-grow overflow-y-auto p-4 space-y-4">
           {messages.map((msg, index) => (<div key={index} className={`flex ${msg.from === 'bot' ? 'justify-start' : 'justify-end'}`}><p className={`p-3 rounded-lg max-w-xs ${msg.from === 'bot' ? 'bg-gray-200 text-gray-800' : 'bg-amber-800 text-white'}`}>{msg.text}</p></div>))}
           {isLoading && (<div className="flex justify-start"><p className="p-3 rounded-lg bg-gray-200 text-gray-500"><span className="animate-pulse">...</span></p></div>)}
           <div ref={messagesEndRef} />
         </div>
-        <form onSubmit={handleSendMessage} className="p-4 border-t">
+        
+        {/* Input Form */}
+        <form onSubmit={handleSendMessage} className="p-4 border-t flex-shrink-0">
           <div className="flex gap-2">
             <input 
               type="text" 

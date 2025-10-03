@@ -10,7 +10,7 @@ const slides = [
     subheadline: 'Experience artisan coffee, sustainably sourced and freshly roasted.'
   },
   { 
-    bgImage: '/background2.jpeg',
+    bgImage: '/brown.jpeg',
     headline: 'The Art of the Bean',
     subheadline: 'From farm to cup, every step is a testament to quality.'
   },
